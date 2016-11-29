@@ -20,8 +20,8 @@ __About This Repo:__ _Hey Superheroes! Here's a fresh clean spot where we can dr
   1. Put data into postgres (Laura and Maya)
   1. analysis: linear regression for correlation between solar radiation and net generation for predicting energy output
   1. Optional: may add other analysis
-  1. use hourly data to predict current energy generation - create a metric for fluctuation /use standard deviation
-    - figure out how/what to store, cache, throw out
+  1. use daily or hourly data to keep a tally of fluctuation of solar radiation
+  1. predict monthly energy generation
 3. Combine the outcomes of each of the stations into a simple display
   1. first as a response in terminal
   1. as a simple web response
