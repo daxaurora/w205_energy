@@ -7,15 +7,11 @@ __About This Repo:__ _Hey Superheroes! Here's a fresh clean spot where we can dr
 * [Climate Data Online: Documentation](http://www.ncdc.noaa.gov/cdo-web/webservices/v2#gettingStarted)
 
 ## TO DO BEFORE NEXT MEETING ( ):
-* look into python package FTP lib & Solar Radiation Database
-* identify _what data/variables_ are available and _what files_ contain it and _what schema_ we'll put them into. (Laura - EIA, Geoff & Maya NOAA)
-* draft a project proposal (All)
-* Send project proposal in & Edit final results (Laura)
 * Install Anaconda on Boris' AMI (Maya)
-* create set up script & keep comments on logistical set-up (Boris)
+
 
 ## Outstanding Questions & Long Term TODOs
-* should our API keys be in our python files? (possiblity to include in email along with other parameters for set up)
+* Create instructions for the Final Report for implementation
 
 ## Process Outline:
 0. Background Research
