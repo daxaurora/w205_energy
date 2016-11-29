@@ -14,16 +14,9 @@ __About This Repo:__ _Hey Superheroes! Here's a fresh clean spot where we can dr
 * Create instructions for the Final Report for implementation
 
 ## Process Outline:
-0. Background Research
-  1. get an API key for the data source (DONE)
-  2. figure out which file we want, (__this is the biggest outstanding task__)
-  3. figure out the right API query to run to get that file (PARTIALLY DONE)
-  4. figure out the column names/schema for that data (__depends on item 2__)
-  5. figure out if there is a way to use AWS to house the data we pull in a way that is accessible to each of us.(DONE)
-  6. set up a private team GitHub repo to share code and notes.(DONE)
-1. Start with 1 station:  
+1. Data ingest: 
   1. grab power and capacity information for it (historic)
-    -  choose source(s)
+  1. Grab all solar radiation weather data
   1. grab weather data at that location (historic)
   1. see if we can combine input from last historic and plant historic to give some kind of insightful metric(s)
     - need to know what info we're grabbing from a and b 
