@@ -21,6 +21,7 @@ __About This Repo:__ _Hey Superheroes! Here's a fresh clean spot where we can dr
   1. analysis: linear regression for correlation between solar radiation and net generation for predicting energy output
   1. Optional: may add other analysis
   1. use daily or hourly data to keep a tally of fluctuation of solar radiation
+     - need to compute standard deviations
   1. predict monthly energy generation
 2. Combine the outcomes of each of the stations into a simple display
   1. first as a response in terminal
