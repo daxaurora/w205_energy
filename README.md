@@ -15,15 +15,13 @@ __About This Repo:__ _Hey Superheroes! Here's a fresh clean spot where we can dr
 
 ## Process Outline:
 1. Data ingest: 
-  1. grab power and capacity information for it (historic)
-  1. Grab all solar radiation weather data
-  1. grab weather data at that location (historic)
-  1. see if we can combine input from last historic and plant historic to give some kind of insightful metric(s)
-    - need to know what info we're grabbing from a and b 
-  1. initially can be something super simple, later on make more complex, finally add ml to get this piece (think of it as a little arrow pointing to (send info out, get info back... the info we can fig out later)
-  1. change historic weather input to the new hourly one instead
+  1. grab power and capacity information for it (historic) (Laura)
+  1. Grab all solar radiation weather data (Maya)
+  1. Put data into postgres (Laura and Maya)
+  1. analysis: linear regression for correlation between solar radiation and net generation for predicting energy output
+  1. Optional: may add other analysis
+  1. use hourly data to predict current energy generation - create a metric for fluctuation /use standard deviation
     - figure out how/what to store, cache, throw out
-2. Repeat for a few other stations
 3. Combine the outcomes of each of the stations into a simple display
   1. first as a response in terminal
   1. as a simple web response
