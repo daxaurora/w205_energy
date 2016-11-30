@@ -7,7 +7,6 @@
 # Right now this code is set up assuming this variable is previously defined
 # in the Python environment:
 # EIA_API_KEY = ''
-EIA_API_KEY = '99CE1181091ECCA6C8CD6764B73F8EA9'
 
 # Imports
 import os, requests, numpy as np, pandas as pd
