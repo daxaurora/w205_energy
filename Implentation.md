@@ -18,6 +18,7 @@
 fdisk -l
 ```
 * Mount that EBS
+
 ```mount -t ext4 /dev/<ebs_location> /data
 ```
 Where "<ebs_location>" = the EBS location listed in the output from the fdisk command
