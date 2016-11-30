@@ -13,7 +13,9 @@
 [Assume that we do not need to provide instructions for installing postgres, only for starting it (below)?]
 * Connect to the instance from the command line of a local machine
 * Find the location of the attached EBS (i.e., xvdf):
-```fdisk -l
+
+```
+fdisk -l
 ```
 * Mount that EBS
 ```mount -t ext4 /dev/<ebs_location> /data
