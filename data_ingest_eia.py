@@ -10,8 +10,6 @@
 # This file still needs to be set up to work with other scripts
 # in the same python environment
 
-EIA_API_KEY = '99CE1181091ECCA6C8CD6764B73F8EA9'
-
 # Imports
 import os, requests, numpy as np, pandas as pd
 
