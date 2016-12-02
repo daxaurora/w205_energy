@@ -47,7 +47,7 @@ def create_tables():
                  mwh TEXT NOT NULL)""")
     conn.commit()
     cur.execute("DROP TABLE IF EXISTS weather_stations")
-    cur.execute("""CREATE TABLE weatherstations
+    cur.execute("""CREATE TABLE weather_stations
                 (wban_id TEXT PRIMARY KEY NOT NULL,
                  name TEXT NOT NULL,
                  location TEXT NOT NULL,
@@ -69,7 +69,7 @@ def create_tables():
     conn.commit()
     conn.close()
 
-def recreate_token_file(filepath="~/w205_energy/certs/mytokens.py"):
+def recreate_token_file(filepath="/home/w205/w205_energy/certs/mytokens.py"):
     """
     Function to recreate the file to store credentials.
     """
@@ -83,6 +83,7 @@ def recreate_token_file(filepath="~/w205_energy/certs/mytokens.py"):
     with open(filepath, 'w') as f:
         f.write(doc)
     print("... Empty credentials file created: ", filepath)
+    return filepath
 
 def get_user_credentials():
     """
@@ -114,7 +115,7 @@ if __name__ == '__main__':
     # request the user's API tokens
     credentials = get_user_credentials()
     if credentials:
-        recreate_token_file()
+        filepath = recreate_token_file()
         with open(filepath, 'a') as f:
             f.write(credentials)
         print("... Credentials successfully stored.")
