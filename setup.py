@@ -121,4 +121,4 @@ if __name__ == '__main__':
         print("... You are now ready to deploy your application.")
     else:
         print("... OK. No credentials stored at this time.")
-        print("... Please re-run setup.sh to store your credentials before deploying your application.")
+        print("... Please re-run setup.py to store your credentials before deploying your application.")

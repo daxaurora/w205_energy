@@ -1,18 +1,18 @@
 
-# Project Sunshine
-# Download EIA data
-
-
-# Right now this code is set up assuming this variable is previously defined
-# in the Python environment:
-# For now uncomment the following line and add an API code:
-# EIA_API_KEY = ''
+"""
+This python script loaads EIA data for Project Sunshine (W205 Final Project).
+Before running this script please be sure that you have run setup.py to store
+your API key in certs/mytokens.py. Alternately, you can manually enter it below.
+"""
 # This file still needs to be set up to work with other scripts
 # in the same python environment
 
 # Imports
 import os, requests, numpy as np, pandas as pd
 
+# import the EIA API key or comment out this line and add it manually
+from certs.mytokens import EIA_API_KEY
+# EIA_API_KEY = ''
 
 # First download the list of states
 # EIA list of states is here: http://www.eia.gov/opendata/qb.php?category=1017
