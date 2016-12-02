@@ -3,12 +3,13 @@
 # Implementation instructions - DRAFT
 ### Following these instructions will re-create a runnable instance of this project from scratch.
 
-[From what I understand, implementation instructions should be in the Final Report document, and emailed to Arash.  So maybe all of this should go into the Final Report.  BUT I also like the idea of creating a markdown document in the github repo so that code can be copied and pasted.  So for now I'm making a markdown document, and maybe we can leave this whole thing in the repo, and copy and paste to the Final Report whatever we feel is appropriate once we get to that.]
+[Implementation instructions should be in the Final Report document, and emailed to Arash.  But perhaps this document can remain as a markdown document, and we can either refer to it in, or attach it to the Final Report?]
+[Also: some of this may instead end up in a bash set up script]
 
 #### Step 1 - Launch an AWS AMI
-* Launch an AWS EC2 instance of this AMI: UCB MIDS W205 EX2-FULL AMI
+* Launch an AWS EC2 instance of this AMI: UCB W205 Spring 2016
     * Instance size: m3.large
-    * Security group: [I don't know what we need to do for this.]
+    * Security group: [Do we need the Hadoop Cluster Security Group we have been using for class or not?]
 * Attach to this AMI an EBS on which postgres has been installed
 [Assume that we do not need to provide instructions for installing postgres, only for starting it (below)?]
 * Connect to the instance from the command line of a local machine
@@ -25,9 +26,12 @@ Where ebs_location is the EBS location listed in the output from the fdisk comma
 #### Step 2 - Set up the AMI
 * Start postgres as the root user:
 ```
-data/start_postgres.sh
+/data/start_postgres.sh
 ```
-* [IMPORTANT:  Do we need to install Python 3?]
+* Install Python 3 as the root user:
+```
+sudo yum install python34
+```
 * Install the following packages as the root user:
 ```
 pip install requests
@@ -38,15 +42,20 @@ pip install psycopg2
 su - w205
 ```
 * Clone the Github repo directly to the /home/w205 directory (provide link to repo)
+```
+https://github.com/superbb/w205_energy.git
+```
 [Assume that we need to make Arash a collaborator for him to have access to a private repo, right?]
-[Assume that we do not need to provide code for cloing the repo and that Arash knows how to do that]
+[Assume that we do not need to provide code for cloning the repo and that Arash knows how to do that]
 * [If we switch the files for this project to a branch, as we did for other assignments before grading, we will need to provide instructions to switch to that branch first - TBD]
 ```
 git checkout [branchname]
 ```
-* Copy the files from the repo into another directory:
+* Copy the files from the repo into another directory so the project is not run inside the repo:
+[Note: this might work better if there is one folder inside w205_energy that has all the scripts in it, then that folder can be copied out of the repo.  TBD]
+[Also note: the setup.py document has a specific path listed for saving the credentials file that we will need to make sure works with whatever file structure is set up here.]
 ```
-cp -r /home/w205/w205_energy/[subdirectory] /home/w205/
+cp -r /home/w205/w205_energy/ /home/w205/sunshine/
 ```
 [Note: sort out some standard procedure about where to put things, so that running all scripts below can be done by copying/pasting text]
 
