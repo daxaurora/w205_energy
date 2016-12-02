@@ -11,7 +11,6 @@
     * Instance size: m3.large
     * Security group: [Do we need the Hadoop Cluster Security Group we have been using for class or not?]
 * Attach to this AMI an EBS on which postgres has been installed
-[Assume that we do not need to provide instructions for installing postgres, only for starting it (below)?]
 * Connect to the instance from the command line of a local machine
 * Find the location of the attached EBS (i.e., xvdf):
 ```
@@ -37,36 +36,36 @@ sudo yum install python34
 pip install requests
 pip install psycopg2
 ```
-* Switch to user w205 [assuming we are using the UCB AMI]
+* Switch to user w205 _NOTE: I could not figure out how to switch users via a bash script - does anyone else know how to do this? - Laura_
 ```
 su - w205
 ```
-* Clone the Github repo directly to the /home/w205 directory (provide link to repo)
+* Clone the Github repo directly to the /home/w205 directory. Repo link:
 ```
 https://github.com/superbb/w205_energy.git
 ```
-[Assume that we need to make Arash a collaborator for him to have access to a private repo, right?]
-[Assume that we do not need to provide code for cloning the repo and that Arash knows how to do that]
-* [If we switch the files for this project to a branch, as we did for other assignments before grading, we will need to provide instructions to switch to that branch first - TBD]
+[Procedural issues:
+1) We need to make Arash a collaborator for him to have access to this private repo.
+2) Given that a password is required to clone a private repo, we will either need to keep this step out of a bash file OR collect a password as we did with the EIA key and NOAA token.
+3) Presumably we should actually have all this in a branch, as we did for other assignments before grading. In that case, we will need to include this code:
 ```
+# This code not yet necessary, but it will be eventually, assuming Arash wants us to create a separate branch for the project code.
 git checkout [branchname]
 ```
-* Copy the files from the repo into another directory so the project is not run inside the repo:
-[Note: this might work better if there is one folder inside w205_energy that has all the scripts in it, then that folder can be copied out of the repo.  TBD]
-[Also note: the setup.py document has a specific path listed for saving the credentials file that we will need to make sure works with whatever file structure is set up here.]
+* IMPORTANT:  all code is currently set up to run from inside the repo, with the repo cloned as above to the /home/w205 directory.  If it's necessary to copy the repo to another location, use this code:
 ```
-cp -r /home/w205/w205_energy/ /home/w205/sunshine/
+# This code is not currently necessary, and may not ever be necessary:
+cp -r /home/w205/[current location] /home/w205/w205_energy/
 ```
-[Note: sort out some standard procedure about where to put things, so that running all scripts below can be done by copying/pasting text]
 
 #### Step 3 - Setup Postgres tables and authentication
 * From any directory, run this setup script:
 ```
-/home/w205/[subdirectory]/setup.py[ or setup.sh]
+python /home/w205/w205_energy/setup.py
 ```
-[Note: filename in our repo is setup.py, but error statement at end refers to a setup.sh - is this going to be a separate file?]
-* At the prompts, enter this authentication information:
-[I think this document would work best as a markdown document in the repo, and then we can put the EIA key and NOAA token into the Final report and state clearly in this document where where to look in the final report.  The final report will be emailed to Arash and won't be on the Repo, so that seems secure]
+_ISSUE: The setup.py file is currently giving me errors.  TBD_
+* At the prompts, enter an EIA API key and NOAA Token: 
+[The EIA key and NOAA token can be included in the Final report. The final report will be emailed to Arash and won't be on the Repo, so that seems secure]
 
 #### Step 4 - Data ingest and modeling
 * From any directory, run these scripts to complete data ingest and data modeling
