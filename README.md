@@ -22,7 +22,7 @@ __PREREQUISITES:__ _The code in this repository is intended to be run on the_ __
 __STEP 1:__ As the root user, download and run the installation script:
 * `wget ...`
 * `bash ...`
-* this script should include the steps to install packages, switch to w205 user, clone the repo, and cd in to that folder.
+* this script should include the steps to install packages, start postgres, switch to w205 user, clone the repo, and cd in to that folder.
 
 __STEP 2:__ Setup architecture: `python setup.py`
 * NOTE: _this script will prompt you to enter your API credentials, please ensure that you have them on hand. For your security, the credentials you provide will be deleted by the clean up scripts in step 5 to avoid their getting on to github._
