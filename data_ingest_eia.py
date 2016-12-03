@@ -8,6 +8,7 @@ your API key in certs/mytokens.py. Alternately, you can manually enter it below.
 # in the same python environment
 
 # Imports
+from __future__ import absolute_import, print_function, unicode_literals
 import os, requests, numpy as np, pandas as pd
 
 # import the EIA API key or comment out this line and add it manually
