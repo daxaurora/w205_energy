@@ -1,4 +1,3 @@
-
 """
 This python script loaads EIA data for Project Sunshine (W205 Final Project).
 Before running this script please be sure that you have run setup.py to store
