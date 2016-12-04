@@ -39,12 +39,16 @@ chmod +x ./setup_ucb_complete_plus_postgres.sh
 ```
 
 * If the attached EBS already has Postgres installed, mount that EBS (this is not necessary if you just now installed Postgres on this EBS)
-`mount -t ext4 /dev/<ebs_location> /data`
+```
+mount -t ext4 /dev/<ebs_location> /data
+```
 (_Where ebs_location is the EBS location listed in the output from the fdisk command._)
 
 #### Step 2 - Set up the AMI
 * Start postgres as the root user:
-`/data/start_postgres.sh`
+```
+/data/start_postgres.sh
+```
 
 * Install Anaconda as the root user:
 ```
