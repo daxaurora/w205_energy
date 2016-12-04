@@ -59,7 +59,7 @@ def create_tables():
     conn.commit()
     cur.execute("DROP TABLE IF EXISTS uscrn_monthly")
     cur.execute("""CREATE TABLE uscrn_monthly
-                (month TEXT PRIMARY KEY NOT NULL,
+                (month TEXT NOT NULL,
                  wban_id TEXT NOT NULL,
                  max_temp TEXT NOT NULL,
                  min_temp TEXT NOT NULL,
