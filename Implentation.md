@@ -19,7 +19,7 @@
         * Protocol for all rules:  TCP
 * If you have an EBS on which postgres has been installed, attach that to the AMI via the EWS Console
 * Connect to the instance from the command line of a local machine
-* Find the location of the attached 100GB EBS, where the location will start with /dev and be similar or identical to /dev/xvdf
+* Find the location of the attached 100GB EBS. The location will be similar to or identical to /dev/xvdf
 ```
 fdisk -l
 ```
@@ -34,9 +34,10 @@ chmod +x ./setup_ucb_complete_plus_postgres.sh
 # Note that this will re-format the EBS from scratch
 ```
 * If the attached EBS already has Postgres installed, mount that EBS (this is not necessary if you just now installed Postgres on this EBS)
-```mount -t ext4 /dev/<*ebs_location*> /data
+```mount -t ext4 /dev/<ebs_location> /data
 ```
-(_Where *ebs_location* is the EBS location listed in the output from the fdisk command. It may, or may not, be /dev/xvdf_)
+
+(_Where ebs_location is the EBS location listed in the output from the fdisk command. It may, or may not, be /dev/xvdf_)
 
 
 #### Step 2 - Set up the AMI
