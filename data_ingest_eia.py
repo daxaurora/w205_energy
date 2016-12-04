@@ -3,12 +3,11 @@ This python script loaads EIA data for Project Sunshine (W205 Final Project).
 Before running this script please be sure that you have run setup.py to store
 your API key in certs/mytokens.py. Alternately, you can manually enter it below.
 """
-# This file still needs to be set up to work with other scripts
-# in the same python environment
 
 # Imports
 from __future__ import absolute_import, print_function, unicode_literals
-import os, requests, numpy as np, pandas as pd
+import os, requests, psycopg2, numpy as np, pandas as pd
+from sqlalchemy import create_engine
 
 # import the EIA API key or comment out this line and add it manually
 from certs.mytokens import EIA_API_KEY
@@ -36,8 +35,7 @@ states_json = pd.io.json.json_normalize(states_dict['category'])
 states_df = pd.DataFrame(states_json['childcategories'][0],
                          columns = ["name", 'category_id'])
 
-# For each state, download the list of all power plants in that state
-
+# DOWNLOAD PLANT DATA
 
 # Create empty dataframe to hold the list of all power plants
 columns = ["name", 'category_id']
@@ -60,13 +58,22 @@ for state in states_df.itertuples():
     temp_df = all_plants_df.append(plants_df, ignore_index = True)
     all_plants_df = temp_df
 
-# Fix names to remove the numbers in parentheses that have indeterminate meaning
+# Fix names to remove the numbers in parentheses in each plant name
 plants_name_temp1 = all_plants_df["name"].str.split(')').str.get(1)
 plants_name_temp2 = pd.DataFrame(plants_name_temp1.str.split('(').str.get(0),
                                  columns = ["name"])
-# plants_name_temp3 = pd.DataFrame(plants_name_temp2)
-plants_final_df = pd.concat([plants_name_temp2, all_plants_df["category_id"]],
+# Put data together in one dataframe
+plants_final_df = pd.concat([plants_name_temp2,
+                             all_plants_df["category_id"].astype('int')],
                              axis=1)
+# Rename columns to match the ER diagram
+col_new = {"name": "name", "category_id": "plant_id"}
+plants_final_df.columns = [col_new.get(x, x) for x in plants_final_df.columns]
+
+# Turn column into index
+plants_final_df.set_index("plant_id", inplace = True)
+
+# DOWNLOAD SOLAR LOCATION DATA
 
 # Create empty dataframe to hold the list of all solar power locations
 columns = ["name", 'series_id']
@@ -76,8 +83,7 @@ solar_df = pd.DataFrame(columns = columns)
 # Iterate over each category_id value for each plant in the final_plants_df dataframe
 for plant in plants_final_df.itertuples():
     # Isolate the category_id for each state
-    plant_id_int = int(plant[2])
-    plant_id = str(plant_id_int)
+    plant_id = str(plant[0])
     # Download the plant data
     series_url = 'http://api.eia.gov/category/?api_key=' + EIA_API_KEY + '&category_id=' + plant_id
     series = requests.get(series_url)
@@ -96,7 +102,8 @@ for plant in plants_final_df.itertuples():
 solar_name_temp1 = solar_df["name"].str.split(':').str.get(1)
 solar_name_temp2 = pd.DataFrame(solar_name_temp1.str.split('(').str.get(0), columns = ["name"])
 solar_final_df = pd.concat([solar_df["series_id"], solar_name_temp2], axis=1)
-solar_final_df
+
+# DOWNLOAD ELECTRICITY GENERATION DATA
 
 # Create empty dataframe to hold electricity generation data
 columns = ["series_id", "lat", "lon", "latlon", "year", "month", "mwh"]
@@ -125,6 +132,36 @@ for series in solar_final_df.itertuples():
     temp2_gen_df = gen_final_df.append(temp1_gen_df, ignore_index = True)
     gen_final_df = temp2_gen_df
 
-print(plants_final_df)
-print(solar_final_df)
-print(gen_final_df)
+# LOAD DATA INTO POSTGRES
+
+# Set up connection to the post gres database
+db_loc = 'postgresql+psycopg2://postgres:pass@localhost:5432/solarenergy'
+engine = create_engine(db_loc)
+
+# Load data to plants table
+plants_final_df.to_sql("plants", engine, if_exists='append')
+
+# Set up solar locations dataframe to match the ER diagram
+# Rename column
+col_new = {"name": "plant_name", "series_id": "loc_id"}
+solar_final_df.columns = [col_new.get(x, x) for x in solar_final_df.columns]
+# Turn column into index
+solar_final_df.set_index("loc_id", inplace = True)
+
+# Load data to solar_location table
+solar_final_df.to_sql("solar_locations", engine, if_exists='append')
+
+# Set up generation data to match the ER diagram
+col_new = {"series_id": "loc_id",
+           "lat": "latitude",
+           "lon": "longitude",
+           "latlon": "lat_lon",
+           "date": "full_date",
+           "year": "year",
+           "month": "month",
+           "mwh": "mwh", }
+
+gen_final_df.columns = [col_new.get(x, x) for x in gen_final_df.columns]
+
+# Load data to generation table
+gen_final_df.to_sql("generation", engine, if_exists='append')

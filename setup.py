@@ -34,14 +34,16 @@ def create_tables():
     cur.execute("DROP TABLE IF EXISTS solar_locations")
     cur.execute("""CREATE TABLE solar_locations
                 (loc_id TEXT PRIMARY KEY NOT NULL,
-                 plant_id TEXT NOT NULL,
-                 latitude TEXT NOT NULL,
-                 longitude TEXT NOT NULL)""")
+                 plant_name TEXT NOT NULL)""")
     conn.commit()
     cur.execute("DROP TABLE IF EXISTS generation")
     cur.execute("""CREATE TABLE generation
                 (index TEXT PRIMARY KEY NOT NULL,
-                 series_id TEXT NOT NULL,
+                 loc_id TEXT NOT NULL,
+                 latitude TEXT NOT NULL,
+                 longitude TEXT NOT NULL,
+                 lat_lon TEXT NOT NULL,
+                 full_date TEXT NOT NULL,
                  year TEXT NOT NULL,
                  month TEXT NOT NULL,
                  mwh TEXT NOT NULL)""")
