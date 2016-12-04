@@ -60,7 +60,7 @@ This should print a file path that includes the word anaconda.
 
 * Optional:  Start Jupyter Notebooks as the w205 user:
    * From the EC2 instance: `jupyter notebook --no-browser --port=8888`
-   * Create another connection to the AMI in a new Terminal window on your local machine: `ssh -i "mykey.pem" -NL 10001:localhost:8888 root@ec2-##-##-###-###.compute-1.amazonaws.com` 
+   * Create another connection to the AMI in a new Terminal window on your local machine: `ssh -i "mykey.pem" -NL 10001:localhost:8888 root@ec2-##-##-###-###.compute-1.amazonaws.com`
    * Open a browser to __localhost:10001__
 
    _IMPORTANT:  all code is currently set up to run from inside the repo, with the repo cloned to the /home/w205 directory. If the files are moved elsewhere, code in following steps will not work._
@@ -76,8 +76,6 @@ This should print a file path that includes the word anaconda.
 * From any directory, run these scripts to complete data ingest and to load data into postgres database:
 ```
 python /home/w205/w205_energy/data_ingest_eia.py
-#EIA data ingest script will is not complete:
-# still needs code to load data into postgres
 python /home/w205/w205_energy/data_ingest_noaa.py
 ```
 
