@@ -17,21 +17,15 @@
     Protocol for all rules:  TCP
 * Attach to this AMI an EBS on which postgres has been installed
 * Connect to the instance from the command line of a local machine
-* Find the location of the attached EBS (i.e., xvdf):
-```
-fdisk -l
-```
-* Mount that EBS
-```
-mount -t ext4 /dev/<ebs_location> /data
-```
-Where ebs_location is the EBS location listed in the output from the fdisk command
+* Find the location of the attached EBS (i.e., xvdf): 
+`fdisk -l`
+* Mount that EBS: 
+`mount -t ext4 /dev/<ebs_location> /data`
+(_Where ebs_location is the EBS location listed in the output from the fdisk command._)
 
 #### Step 2 - Set up the AMI
 * Start postgres as the root user:
-```
-/data/start_postgres.sh
-```
+`/data/start_postgres.sh`
 
 * Install Anaconda as the root user:
 ```
@@ -43,47 +37,38 @@ bash Anaconda2-4.2.0-Linux-x86_64.sh
 ```
 
 * Make sure root user is using anaconda python before installing anything else:
-```
-PATH=/data/anaconda2/bin:$PATH
-```
+`PATH=/data/anaconda2/bin:$PATH`
 
 * Install the following packages as the root user:
-```
-pip install psycopg2
-```
+`pip install psycopg2`
 
 Note that it is possible to see a list of all installed modules by going to the python prompt and entering help("modules").
 
 
-* Switch to user w205 _NOTE: I could not figure out how to switch users via a bash script - does anyone else know how to do this? - Laura_
-```
-su - w205
-```
-* Update this user’s path to use new(anaconda) python:
-``` PATH=/data/anaconda2/bin:$PATH
-```
+* Switch to user w205: 
+`su - w205`
+_NOTE: I could not figure out how to switch users via a bash script - does anyone else know how to do this? - Laura_
 
-* Confirm this worked using:
-```which python
-```
+* Update this user’s path to use new(anaconda) python:
+`PATH=/data/anaconda2/bin:$PATH`
+
+* Confirm this worked using: `which python`
 This should print a file path that includes the word anaconda.
 
 * Optional:  Start Jupyter Notebooks as the w205 user:
-```
-jupyter notebook —-no-browser —port=8888
-```
+   * From the EC2 instance: `jupyter notebook —-no-browser —port=8888`
+   * From your local machine: `ssh -i "mykey.pem" -NL 8888:localhost:10001 root@ec2-##-##-###-###.compute-1.amazonaws.com`
+   * Open a browser to __localhost:10001__
 
-* Clone the Github repo directly to the /home/w205 directory
-```git clone https://github.com/superbb/w205_energy.git
-```
+* Clone the Github repo directly to the /home/w205 directory:
+`git clone https://github.com/superbb/w205_energy.git`
 
 _IMPORTANT:  all code is currently set up to run from inside the repo, with the repo cloned to the /home/w205 directory. If the files are moved elsewhere, code in following steps will not work._
 
 #### Step 3 - Setup Postgres tables and authentication
 * From any directory, run this setup script:
-```
-python /home/w205/w205_energy/setup.py
-```
+`python /home/w205/w205_energy/setup.py`
+
 * At the prompts, enter an EIA API key and NOAA Token:
 [The EIA key and NOAA token can be included in the Final report. The final report will be emailed to Arash and won't be on the Repo, so that seems secure]
 
