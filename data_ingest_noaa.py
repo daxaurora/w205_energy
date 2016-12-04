@@ -109,7 +109,7 @@ def load_monthly_data(verbose=False):
 
 # command line instructions
 if __name__ == '__main__':
-    if len(sys.argv) > 2 and sys.argv[2].lower() == 'verbose':
+    if len(sys.argv) > 1 and sys.argv[1].lower() == 'verbose':
         verbose = True
     else:
         verbose = False
