@@ -17,7 +17,7 @@ __About This Repo:__ _Hey Superheroes! Here's a fresh clean spot where we can dr
 * check it all on a fresh AMI (a few times or, like, 10)
 
 ## How to Deploy this Application (DRAFT) :
-__PREREQUISITES:__ _The code in this repository is intended to be run on the_ __UCB MIDS W205 EX2-FULL__ _AMI. Prior to following the steps described below it is assumed that the root user has launched the AMI and mounted an EBS volume with at least 100 GB of space at_ __/data__. Note that the set up process for running this application assumes that you are running Python2 and requires that the user have access to EAI (http://www.eia.gov/opendata/register.php) and NOAA API (https://www.ncdc.noaa.gov/cdo-web/token) credentials. Please have those on hand before proceeding._
+__PREREQUISITES:__ _The code in this repository is intended to be run on the_ __UCB MIDS W205 EX2-FULL__ _AMI. Prior to following the steps described below it is assumed that the root user has launched the AMI and mounted an EBS volume with at least 100 GB of space at_ __/data__. Note that the set up process for running this application assumes that you are running Python2 and requires that the user have access to EAI (http://www.eia.gov/opendata/register.php) and NOAA API (https://www.ncdc.noaa.gov/cdo-web/token) credentials. Please have those on hand before proceeding.
 
 __STEP 1:__ As the root user, download and run the installation script:
 * `wget ...`
