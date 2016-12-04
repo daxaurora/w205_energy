@@ -82,7 +82,6 @@ def recreate_token_file(filepath="/home/w205/w205_energy/certs/mytokens.py"):
     doc += '\n"""\n'
     with open(filepath, 'w') as f:
         f.write(doc)
-    print("... Empty credentials file created: ", filepath)
     return filepath
 
 def get_user_credentials():
@@ -116,6 +115,7 @@ if __name__ == '__main__':
     credentials = get_user_credentials()
     if credentials:
         filepath = recreate_token_file()
+        print("... Empty credentials file created: ", filepath)
         with open(filepath, 'a') as f:
             f.write(credentials)
         print("... Credentials successfully stored.")
