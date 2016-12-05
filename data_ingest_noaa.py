@@ -78,11 +78,10 @@ def load_monthly_data(verbose=False):
 
     # selecting only the columns we want for postgres table
     cnames = get_monthly_data_header()
-    usecols = ['WBANNO', 'LST_YRMO', 'T_MONTHLY_MAX', 'T_MONTHLY_MIN',
-            'T_MONTHLY_MEAN', 'P_MONTHLY_CALC', 'SOLRAD_MONTHLY_AVG']
     newcolnames = {'WBANNO':'wban_id', 'LST_YRMO':'month', 'T_MONTHLY_MAX':'max_temp',
             'T_MONTHLY_MIN':'min_temp', 'T_MONTHLY_MEAN':'mean_temp',
             'P_MONTHLY_CALC':'precipitation', 'SOLRAD_MONTHLY_AVG':'solar_radiation'}
+    usecols = [str(c) for c in newcolnames.keys()] 
 
     # connect to database using sql alchemy engine
     db_loc = 'postgresql+psycopg2://postgres:pass@localhost:5432/solarenergy'
@@ -96,9 +95,10 @@ def load_monthly_data(verbose=False):
         try:
             df = pd.read_csv(url, sep = '\s+', header=None, index_col = 'WBANNO',
                                 names=cnames, usecols=usecols)
-        except:
+        except Exception, e:
             if verbose:
                 print('... failed to load %s' %(wban_tup[0]))
+                print('... ERROR:', e)
         # put data into postgres (if it exists)
         if len(df) > 0:
             df.index.names = ['wban_id']
