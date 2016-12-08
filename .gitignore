@@ -2,3 +2,4 @@ api_example.py
 certs/w205groupproject.pem
 certs/w205groupproject.ppk
 *.ipynb_checkpoints
+s3cmd_installation.txt
