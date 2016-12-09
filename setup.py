@@ -8,8 +8,6 @@ MIDS W205, Fall 2016, Final Project
 Team Sunshine
 """
 
-# Thursday 5pm - NOT TESTED YET WITHOUT NOAA TOKEN REQUEST!
-
 # Imports
 from __future__ import absolute_import, print_function, unicode_literals
 import psycopg2
