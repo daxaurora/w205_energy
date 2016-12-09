@@ -3,16 +3,21 @@
 This file contains a script to set up a Postgres Database and tables.
 It will also create a credentials file to store the users API keys
 for reference in subsequent code.
+
+MIDS W205, Fall 2016, Final Project
+Team Sunshine
 """
 
-# imports
+# Thursday 5pm - NOT TESTED YET WITHOUT NOAA TOKEN REQUEST!
+
+# Imports
 from __future__ import absolute_import, print_function, unicode_literals
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
-# defining functions to modularize setup script
+# Defining functions to modularize setup script
 def create_database():
-    """Function to create solarenergy databse"""
+    """Function to create solarenergy database"""
     conn = psycopg2.connect(database='postgres', user='postgres',
                             password='pass', host='localhost', port='5432')
     conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
@@ -77,7 +82,7 @@ def recreate_token_file(filepath="/home/w205/w205_energy/certs/mytokens.py"):
     """
     doc = '#!/usr/bin/env python\n'
     doc += '"""\n'
-    doc += 'This file is a temporary location for EIA and NOAA credentials \n'
+    doc += 'This file is a temporary location for EIA credentials \n'
     doc += 'needed for the data ingest.\n'
     doc += 'NOTE: contents of this file will be populated & deleted by the \n'
     doc += 'setup & clean up scripts associated with this project.'
@@ -88,18 +93,16 @@ def recreate_token_file(filepath="/home/w205/w205_energy/certs/mytokens.py"):
 
 def get_user_credentials():
     """
-    Function to solicit the user's EIA and NOAA credentials to allow storm
-    to access the climate and energy data. This function returns a string of
+    Function to solicit the user's EIA credentials to allow storm
+    to access the energy data. This function returns a string of
     credentials to be appended to a file in the certs folder.
     """
     print("... WARNING: As part of the setup process you will need to provide",
-          "the following credentials: EIA API key & NOAA CDO access token.")
+          "the following credentials: EIA API key.")
     proceed = raw_input("... Do you wish to proceed at this time?[y/n] ")
     if proceed.strip(' ').lower() in ['y','yes']:
         credentials = "\nEIA_API_KEY = \'"
         credentials += raw_input('Enter your EIA API key: ').strip(' ')
-        credentials += "\'\nNOA_CDO_TOKEN = \'"
-        credentials += raw_input('Enter your NOAA CDO token: ').strip(' ')
         credentials += "\'\n"
         print("... You have entered the following credentials: ", credentials)
         submit = raw_input("Please confirm these are correct[y/n]: ").strip(' ')
@@ -107,13 +110,13 @@ def get_user_credentials():
             return credentials
     return None
 
-# main script to be run at the command line
+# Main script to be run at the command line
 if __name__ == '__main__':
-    # prep postgres database and table
+    # Prep postgres database and table
     create_database()
     create_tables()
     print("... Created new Postgres database and table for solar energy.")
-    # request the user's API tokens
+    # Request the user's API tokens
     credentials = get_user_credentials()
     if credentials:
         filepath = recreate_token_file()
@@ -124,4 +127,5 @@ if __name__ == '__main__':
         print("... You are now ready to deploy your application.")
     else:
         print("... OK. No credentials stored at this time.")
-        print("... Please re-run setup.py to store your credentials before deploying your application.")
+        print("... Please re-run setup.py to store your credentials before" +
+              "deploying your application.")
