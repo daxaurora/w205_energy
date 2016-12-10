@@ -9,8 +9,6 @@ Or
     python data_ingest_eia.py verbose
 """
 
-# updated FRIDAY AT 5PM - NOT YET TESTED!
-
 # Imports
 from __future__ import absolute_import, print_function, unicode_literals
 import os, requests, psycopg2, numpy as np, pandas as pd
@@ -118,7 +116,7 @@ def generation_data(solar_final_df):
     for series in solar_final_df.itertuples():
         series_id = str(series[1])
         # Download the plant data
-        gen_url = 'http://api.eia.gov/series/?api_key=' + EIA_API_KEY +
+        gen_url = 'http://api.eia.gov/series/?api_key=' + EIA_API_KEY + \
                   '&series_id=' + series_id
         gen = requests.get(gen_url)
         # Put downloaded data into a dataframe
@@ -167,7 +165,7 @@ def to_postgres(plants_final_df, solar_final_df, gen_final_df):
                "year": "year",
                "month": "month",
                "mwh": "mwh", }
-    gen_final_df.columns = [col_new.get(x, x) for x in gen_final_df.columns
+    gen_final_df.columns = [col_new.get(x, x) for x in gen_final_df.columns]
     # Load data to generation table
     gen_final_df.to_sql("generation", engine, if_exists='append')
 
