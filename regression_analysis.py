@@ -9,11 +9,13 @@ Team Sunshine
 
 # Imports
 from __future__ import absolute_import, print_function, unicode_literals
+import numpy as np
+import pandas as pd
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
-# fxn to pull monthly weather and
+# Defining functions to modularize setup script.
 def get_monthly_data():
     """
     This function connects to the postgres DB to pull weather data
