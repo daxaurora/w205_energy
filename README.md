@@ -17,7 +17,8 @@ _The code in this repository requires a few assumptions be met_:
 * The AMI's Security Group includes the necessary Inbound Rules.
 * The AMI has been launched and connected to from a local machine.
 * The attached EBS has been mounted at __/data__.
-_These steps are all outlined in Step 1 of the Instructions.md file included in this repo. Please refer to that document if these prerequisites are unclear._
+
+__Each of these steps is outlined in Step 1 of the Instructions.md file in this repo. Please refer to that document if these prerequisites are unclear.__
 
 Additionally it will be necessary for the user to have an EIA API Key ready to supply for a setup script. A key can be obtained via EIA (http://www.eia.gov/opendata/register.php) and also a key will be provided in the Final Project Report.
 
