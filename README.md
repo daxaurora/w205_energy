@@ -95,7 +95,7 @@ __STEP 4 - Data ingest, modeling, and storage__
 
 * From any directory, run these scripts to complete data ingest, load data into a postgres database, and create CSV files for storage on Amazon S3.
     * The data_ingest_eia.py file may take approximately 10 minutes to run.
-    * Add `verbose` at the end of each command to see logging.
+    * Add `verbose` after data_ingest_noaa.py to see logging for that file.
 ```
 python /home/w205/w205_energy/data_ingest_eia.py
 python /home/w205/w205_energy/data_ingest_noaa.py
