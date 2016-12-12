@@ -1,6 +1,6 @@
 # Team Sunshine
 
-# Implementation instructions - DRAFT
+# Implementation instructions
 ### Following these instructions will re-create a runnable instance of this project from scratch.
 
 #### Step 1 - Launch an AWS AMI and set up the EBS
@@ -36,7 +36,6 @@ chmod +x ./setup_ucb_complete_plus_postgres.sh
 ```
 mount
 ```
-If the 100GB EBS location is not listed in the output it is already mounted.
 
 * Mount the EBS if necessary:
 ```
@@ -51,9 +50,9 @@ mount -t ext4 /dev/<ebs_location> /data
 ```
 
 * Install Anaconda as the root user:
-    * _IMPORTANT:
+    * _IMPORTANT_:
         * When prompted change installation location to /data/anaconda2
-        * when prompted to prepend Anaconda location in .bashrc, enter yes_
+        * When prompted to prepend Anaconda location in .bashrc, enter yes
 ```
 wget https://repo.continuum.io/archive/Anaconda2-4.2.0-Linux-x86_64.sh
 bash Anaconda2-4.2.0-Linux-x86_64.sh
@@ -61,6 +60,7 @@ bash Anaconda2-4.2.0-Linux-x86_64.sh
 ```
 
 * Switch root user to using anaconda python before proceeding.
+
 _NOTE: This command must be entered for every new connection to the root user on the AMI._
 ```
 PATH=/data/anaconda2/bin:$PATH
@@ -83,6 +83,7 @@ su - w205
 ```
 
 * Update this user’s path to use new(anaconda) python:
+
 _NOTE: This command must be entered EVERY TIME you switch to the w205 user on the AMI. If you switch to the root user and switch back to the w205 user, you must enter this command again._
 ```
 PATH=/data/anaconda2/bin:$PATH
