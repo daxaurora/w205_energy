@@ -34,7 +34,7 @@ However for private accounts, we'd recommend following the gAuth steps in Users 
 
 ## 4. Connect to the postgres table with the data
 We used an RDS hosted database because it allows us to use a scalable PstgreSQL database for a reasonable price.
-(Amazon RDS)[https://console.aws.amazon.com/rds/home?region=us-east-1]
+[Amazon RDS](https://console.aws.amazon.com/rds/home?region=us-east-1)
 
 ![alt Setup DB Connection](https://github.com/superbb/w205_energy/blob/master/img/redash-setup-db.png "re:dash Setup DB Connection")
 
