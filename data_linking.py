@@ -122,7 +122,7 @@ def load_to_postgres(closest_stations_df, verbose=False):
     # load
     closest_stations_df.to_sql("closest_stations", engine, if_exists='append')
     if verbose:
-        print('... loaded closest_stations table to postgres.'
+        print('... loaded closest_stations table to postgres.')
 
 
 # Main script to be run at the command line
