@@ -120,10 +120,10 @@ def load_to_postgres(closest_stations_df, verbose=False):
     db_loc += '5432/solarenergy'
     engine = create_engine(db_loc)
 
-    # load
-    closest_stations_df.to_sql("closest_stations", engine, if_exists='append')
+    # load table
+    closest_stations_df.to_sql("closest_stations", engine, if_exists='replace')
     if verbose:
-        print('... loaded closest_stations table to postgres.')
+        print('... loaded closest_stations table to serving layer DB.')
 
 
 # Main script to be run at the command line
