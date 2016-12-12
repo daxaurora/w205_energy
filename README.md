@@ -105,7 +105,8 @@ python /home/w205/w205_energy/postgres_to_csv.py
 __STEP 5 - Analysis and Serving Layers__
 * From any directory, run these scripts to complete data analysis:
 ```
-# [list scripts]
+python /home/w205/w205_energy/data_linking.py
+# [list additional scripts]
 ```
 
 * From any directory, run these scripts to set up the serving layer:
