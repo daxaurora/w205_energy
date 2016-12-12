@@ -17,7 +17,8 @@ _The code in this repository requires a few assumptions be met_:
 * The AMI's Security Group includes the necessary Inbound Rules.
 * The AMI has been launched and connected to from a local machine.
 * The attached EBS has been mounted at __/data__.
-_These steps are all outlined in Step 1 of the Instructions.md file included in this repo. Please refer to that document if these prerequisites are unclear._
+
+__Each of these steps is outlined in Step 1 of the Instructions.md file in this repo. Please refer to that document if these prerequisites are unclear.__
 
 Additionally it will be necessary for the user to have an EIA API Key ready to supply for a setup script. A key can be obtained via EIA (http://www.eia.gov/opendata/register.php) and also a key will be provided in the Final Project Report.
 
@@ -94,7 +95,7 @@ __STEP 4 - Data ingest, modeling, and storage__
 
 * From any directory, run these scripts to complete data ingest, load data into a postgres database, and create CSV files for storage on Amazon S3.
     * The data_ingest_eia.py file may take approximately 10 minutes to run.
-    * Add `verbose` at the end of each command to see logging.
+    * Add `verbose` after data_ingest_noaa.py to see logging for that file.
 ```
 python /home/w205/w205_energy/data_ingest_eia.py
 python /home/w205/w205_energy/data_ingest_noaa.py
@@ -104,7 +105,8 @@ python /home/w205/w205_energy/postgres_to_csv.py
 __STEP 5 - Analysis and Serving Layers__
 * From any directory, run these scripts to complete data analysis:
 ```
-# [list scripts]
+python /home/w205/w205_energy/data_linking.py
+# [list additional scripts]
 ```
 
 * From any directory, run these scripts to set up the serving layer:
