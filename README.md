@@ -103,16 +103,13 @@ python /home/w205/w205_energy/postgres_to_csv.py
 ```
 
 __STEP 5 - Analysis and Serving Layers__
-* From any directory, run these scripts to complete data analysis:
+* From any directory, run these scripts to complete data analysis and load results to the serving layer:
 ```
 python /home/w205/w205_energy/data_linking.py
-# [list additional scripts]
+python /home/w205/w205_energy/energy_analysis.py
 ```
 
-* From any directory, run these scripts to set up the serving layer:
-```
-# [list scripts]
-```
+* The serving layer itself is available at [this website](http://54.144.232.11/public/dashboards/H87SYqBh8rk18eXdkKxPKkXYgPSOqbV9LVJenZ3h?org_slug=default). Detailed instructions on how we implementd this serving layer are provided in the file: __serving_layer.md__.
 
 
 __STEP 6 - Clean up__
