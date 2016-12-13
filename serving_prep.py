@@ -107,4 +107,4 @@ if __name__ == '__main__':
     data_df = get_master_data()
     load_to_postgres(data_df, 'full_details', verbose)
     history_df = get_history()
-    load_to_postgres(data_df, 'full_history', verbose)
+    load_to_postgres(history_df, 'full_history', verbose)
