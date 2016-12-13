@@ -12,7 +12,7 @@ __About This Repo:__ _This repo contains all code and instructions necessary to 
 ## How to Deploy this Application:
 __STEP 1 - PREREQUISITES__
 _The code in this repository requires a few assumptions be met_:
-* This code is intended to be run on the_ __UCB W205 Spring 2016__ AMI.
+* This code is intended to be run on the __UCB W205 Spring 2016__ AMI.
 * The AMI has an attached EBS volume with at least 100GB of space.
 * The AMI's Security Group includes the necessary Inbound Rules.
 * The AMI has been launched and connected to from a local machine.
@@ -94,7 +94,7 @@ python /home/w205/w205_energy/setup.py
 __STEP 4 - Data ingest, modeling, and storage__
 
 * From any directory, run these scripts to complete data ingest, load data into a postgres database, and create CSV files for storage on Amazon S3.
-    * The data_ingest_eia.py file may take approximately 10 minutes to run.
+    * The data_ingest_eia.py file will take approximately 10-15 minutes to run.
     * Add `verbose` after data_ingest_noaa.py to see logging for that file.
 ```
 python /home/w205/w205_energy/data_ingest_eia.py
