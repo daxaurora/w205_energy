@@ -107,6 +107,7 @@ __STEP 5 - Analysis and Serving Layers__
 ```
 python /home/w205/w205_energy/data_linking.py
 python /home/w205/w205_energy/energy_analysis.py
+python /home/w205/w205_energy/serving_prep.py
 ```
 
 * The serving layer itself is available at [this website](http://54.144.232.11/public/dashboards/H87SYqBh8rk18eXdkKxPKkXYgPSOqbV9LVJenZ3h?org_slug=default). Detailed instructions on how we implementd this serving layer are provided in the file: __serving_layer.md__.
