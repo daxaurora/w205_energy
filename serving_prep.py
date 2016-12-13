@@ -18,7 +18,7 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from sqlalchemy import create_engine
 
 
-# Defining functions to modularize setup script.
+# These two queries create master tables upon which we'll build our visualiztion
 def get_master_data():
     """
     This function connects to the postgres DB to pull weather data
@@ -52,7 +52,35 @@ def get_master_data():
     data_df = pd.read_sql(query, engine, index_col = 'loc_id')
     return data_df
 
-def load_to_postgres(data_df, verbose=False):
+def get_history():
+    """
+    This function connects to the postgres DB to pull weather data
+    corresponding to each solar location and month.
+    """
+    # Set up connection to postgres tables
+    db_loc = 'postgresql+psycopg2://teamsunshinedemo:oscarisawesome123'
+    db_loc += '@teamsunshinedemo.coga7nzsvf0h.us-east-1.rds.amazonaws.com:'
+    db_loc += '5432/solarenergy'
+    engine = create_engine(db_loc)
+
+    # get weather data
+    query = """
+            SELECT generation.loc_id AS loc_id,
+                CAST(generation.mwh AS decimal) AS mwh,
+                   CAST(uscrn_monthly.solar_radiation AS decimal) AS solar_radiation,
+                   CAST(generation.mwh AS decimal)/CAST(uscrn_monthly.solar_radiation AS decimal) AS mwh_per_rad,
+                   generation.full_date AS full_date
+            FROM generation
+            INNER JOIN full_details ON generation.loc_id = full_details.loc_id
+            INNER JOIN uscrn_monthly ON uscrn_monthly.wban_id = full_details.wban_id
+            AND uscrn_monthly.month = generation.full_date
+            WHERE uscrn_monthly.solar_radiation <> '-9999.0'
+            GROUP BY 1,2,3,4,5
+            """
+    data_df = pd.read_sql(query, engine, index_col = 'loc_id')
+    return data_df
+
+def load_to_postgres(data_df, table_name, verbose=False):
     """
     This function loads the input dataframe to a postgres table
     called predicted energy production.
@@ -64,9 +92,9 @@ def load_to_postgres(data_df, verbose=False):
     engine = create_engine(db_loc)
 
     # load regression results
-    data_df.to_sql("full_details", engine, if_exists='replace')
+    data_df.to_sql(table_name, engine, if_exists='replace')
     if verbose:
-        print('... loaded master table "full_details" to serving layer DB.')
+        print('... loaded master table "%s" to serving layer DB.'%(table_name))
 
 
 # Main script to be run at the command line
@@ -77,4 +105,6 @@ if __name__ == '__main__':
         verbose = False
     # call functions
     data_df = get_master_data()
-    load_to_postgres(data_df)
+    load_to_postgres(data_df, 'full_details', verbose)
+    history_df = get_history()
+    load_to_postgres(data_df, 'full_history', verbose)
