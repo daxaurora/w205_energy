@@ -131,7 +131,9 @@ python /home/w205/w205_energy/energy_analysis.py
 python /home/w205/w205_energy/serving_prep.py
 ```
 
-* The serving layer itself can be viewed at [this website](http://54.144.232.11/public/dashboards/H87SYqBh8rk18eXdkKxPKkXYgPSOqbV9LVJenZ3h?org_slug=default). Step by step details of how we implemented this site can be found in this repo in a file called __serving_layer.md__.
+* The serving layer itself can be viewed here:
+http://54.152.41.92/public/dashboards/dONtzRNd6TvNhz6cCEHXmDCkURwtVSq9Z4jfR66f?org_slug=default
+Step by step details of how we implemented this site can be found in this repo in a file called __serving_layer.md__.
 
 ## How to set up and use Jupyter Notebooks on the AMI(Optional)
 * First complete all of Steps 1 and 2 above
