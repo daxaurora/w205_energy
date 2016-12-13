@@ -76,7 +76,8 @@ def predict_monthly_mwh(clean_df):
     """
     # remove nans
     missing = np.isnan(clean_df.solar_radiation)
-    monthly_pred_df = clean_df[~missing]
+    monthly_pred_df = clean_df
+    monthly_pred_df = monthly_pred_df[~missing]
 
     # selecting cols for regression
     cols=['solar_radiation','month','lat']
