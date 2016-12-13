@@ -67,8 +67,8 @@ def get_history():
     query = """
             SELECT generation.loc_id AS loc_id,
                 CAST(generation.mwh AS decimal) AS mwh,
-                   CAST(uscrn_monthly.solar_radiation AS decimal) AS solar_radiation,
-                   CAST(generation.mwh AS decimal)/CAST(uscrn_monthly.solar_radiation AS decimal) AS mwh_per_rad,
+                CAST(uscrn_monthly.solar_radiation AS decimal) AS solar_radiation,
+                CAST(generation.mwh AS decimal)/CAST(uscrn_monthly.solar_radiation AS decimal) AS mwh_per_rad,
                    generation.full_date AS full_date
             FROM generation
             INNER JOIN full_details ON generation.loc_id = full_details.loc_id
@@ -79,6 +79,37 @@ def get_history():
             """
     data_df = pd.read_sql(query, engine, index_col = 'loc_id')
     return data_df
+
+def get_avg():
+    """
+    This function connects to the postgres DB to pull aggregate stats.
+    """
+    # Set up connection to postgres tables
+    db_loc = 'postgresql+psycopg2://teamsunshinedemo:oscarisawesome123'
+    db_loc += '@teamsunshinedemo.coga7nzsvf0h.us-east-1.rds.amazonaws.com:'
+    db_loc += '5432/solarenergy'
+    engine = create_engine(db_loc)
+
+    # get weather data
+    query = """
+            SELECT loc_id,
+                   AVG(mwh) AS mwh_avg,
+                   SUM(mwh) AS mwh_sum,
+                   AVG(solar_radiation) AS sr_avg,
+                   SUM(solar_radiation) AS sr_sum,
+                   AVG(mwh_per_rad) AS mwh_per_rad_avg,
+                   SUM(mwh_per_rad) AS mwh_per_rad_sum,
+                   COUNT(DISTINCT full_date)/12 AS years_in_op,
+                   MIN(full_date) AS oldest_update,
+                   MAX(full_date) AS newest_update
+            FROM full_history
+            WHERE full_date >'201012'
+            GROUP BY loc_id
+            HAVING MAX(full_date) > '201606'
+            """
+    data_df = pd.read_sql(query, engine, index_col = 'loc_id')
+    return data_df
+
 
 def load_to_postgres(data_df, table_name, verbose=False):
     """
@@ -108,3 +139,5 @@ if __name__ == '__main__':
     load_to_postgres(data_df, 'full_details', verbose)
     history_df = get_history()
     load_to_postgres(history_df, 'full_history', verbose)
+    avg_df = get_avg()
+    load_to_postgres(avg_df, 'historic_avg', verbose)
