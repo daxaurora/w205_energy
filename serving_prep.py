@@ -1,4 +1,4 @@
-!/usr/bin/env python
+#!/usr/bin/env python
 """
 This file contains a script to create a master table to facilitate
 easy visualization in our serving layer.
