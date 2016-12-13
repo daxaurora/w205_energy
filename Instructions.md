@@ -123,20 +123,17 @@ python /home/w205/w205_energy/data_ingest_noaa.py
 python /home/w205/w205_energy/postgres_to_csv.py
 ```
 
-
 #### Step 5 - Data analysis and serving layers
-* From any directory, run these scripts to complete data analysis:
+* From any directory, run these scripts to complete data analysis and prep the serving layer:
 ```
 python /home/w205/w205_energy/data_linking.py
-# [list additional scripts]
+python /home/w205/w205_energy/energy_analysis.py
+python /home/w205/w205_energy/serving_prep.py
 ```
 
-* From any directory, run these scripts to interact with the serving layer:
-```
-# [list scripts]
-```
+* The serving layer itself can be viewed at [this website](http://54.144.232.11/public/dashboards/H87SYqBh8rk18eXdkKxPKkXYgPSOqbV9LVJenZ3h?org_slug=default). Step by step details of how we implemented this site can be found in this repo in a file called __serving_layer.md__.
 
-## How to set up and use Jupyter Notebooks on the AMI
+## How to set up and use Jupyter Notebooks on the AMI(Optional)
 * First complete all of Steps 1 and 2 above
 * At the terminal connection to the instance, navigate to the directory at which you want to open Jupyter Notebooks.
 * Then enter:
